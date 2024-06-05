@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .item-info {
+            margin-bottom: 20px;
+        }
+        .payment-method {
+            margin-top: 50px;
+        }
+        .payment-method label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        .payment-method input[type="radio"] {
+            margin-right: 10px;
+        }
+        .gcash-input {
+            margin-top: 20px;
+        }
+        .gcash-input label {
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+        .gcash-input input[type="number"] {
+            width: 40%;
+            padding: 10px;
+            margin-top: 2px;
+            box-sizing: border-box; 
+        }
+        .error {
+            color: red;
+            margin-top: 10px;
+        }
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 18px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checkout</h1>
+        <div class="item-info">
+            <h2>Item Details</h2>
+            <p><strong>Name:</strong> <span id="item-name"></span></p>
+            <p><strong>Price:</strong> <span id="item-price"></span></p>
+            <p><strong>Quantity:</strong> <span id="item-quantity"></span></p>
+        </div>
+        <div class="payment-method">
+            <h2>Select Payment Method</h2>
+            <label>
+                <input type="radio" name="payment-method" value="gcash" checked>
+                GCash
+            </label>
+            <!-- Add more payment methods if needed -->
+        </div>
+        <div class="gcash-input">
+            <label for="gcash-number">GCash Account Number:
+            <input type="number" id="gcash-number" name="gcash-number" placeholder="Enter GCash account number" required>
+        </label>
+            <p class="error" id="gcash-error"></p>
+        </div>
+        <button class="checkout-btn" onclick="proceedToCheckout()">Place Order</button>
+    </div>
+
+    <script>
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const itemName = urlParams.get('name');
+        const itemPrice = urlParams.get('price');
+        const itemQuantity = urlParams.get('quantity');
+
+        
+        document.getElementById('item-name').innerText = itemName;
+        document.getElementById('item-price').innerText = itemPrice;
+        document.getElementById('item-quantity').innerText = itemQuantity;
+
+        
+        function proceedToCheckout() {
+            const gcashNumber = document.getElementById('gcash-number').value;
+            const gcashError = document.getElementById('gcash-error');
+
+            if (!gcashNumber) {
+                gcashError.innerText = 'GCash account number is required.';
+            } else {
+                gcashError.innerText = '';
+                
+                window.location.href = `confirmation.html?name=${encodeURIComponent(itemName)}&quantity=${encodeURIComponent(itemQuantity)}&price=${encodeURIComponent(itemPrice)}&gcash=${encodeURIComponent(gcashNumber)}`;
+            }
+        }
+    </script>
+</body>
+</html>

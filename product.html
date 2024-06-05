@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+   
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            
+            background-color: black;
+        }
+        .up {
+            display: flex;
+            gap: 20px;
+        }
+        .up .aa {
+            text-decoration: none;
+            color: white;
+        }
+        input[type="text"] {
+            margin-left: auto;
+            width: 250px;
+        }
+        .p {
+            color: white;
+        }
+        .pp {
+            color: red;
+        }
+        .s {
+            text-decoration: none;
+            font-size: 25px;
+        }
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+            margin-left: auto;
+        }
+        .search-container input[type="text"] {
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            padding-left: 35px; 
+        }
+        .search-container label {
+            position: absolute;
+            left: 10px;
+            color: #999;
+            pointer-events: none; 
+        }
+        p {
+            margin-top: 35px;
+            color: white;
+            font-size: 28px;
+        }
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(4, 1fr); 
+            gap: 5px;
+        }
+        .grid-item {
+            position: relative;
+            overflow: hidden; 
+        }
+        .grid-item-inner {
+            height: 230px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            font-size: 20px;
+            position: relative;
+            transition: transform 0.3s ease; 
+        }
+        .grid-item-inner img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+        }
+        .grid-item-inner .info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            right: 10px;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.5); 
+            padding: 5px;
+            border-radius: 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .grid-item-inner .info .name {
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .grid-item-inner .info .price {
+            font-size: 19px;
+            color: #ffcc00; 
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 10;
+           
+        }
+        .overlay-content {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0px 5px 5px black;
+        }
+        .close-btn {
+            background: red;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            margin-top: 10px;
+            box-shadow: 0px 5px 5px black;
+        }
+        .close-btn:active{
+            transform: translateY(5px);
+            box-shadow: none;
+        }
+        #item-price{
+            color:black;
+        }
+        input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+input[type="number"] {
+    -moz-appearance: textfield; /* Firefox */
+}
+button[type ="submit"]{
+    box-shadow: 0px 5px 5px black;
+    border:none;
+}
+button[type ="submit"]:active{
+    transform: translateY(5px);
+            box-shadow: none;
+}
+    </style>
+</head>
+<body>
+    <div class="upper">
+        <p>Find your best findings here!</p>
+    </div>
+    <div class="grid-container">
+        <div class="grid-item" onclick="openForm('BLACK SHORT', '₱199')">
+            <div class="grid-item-inner">
+                <img src="1.jpg" alt="">
+                <div class="info">
+                    <div class="name">BLACK SHORT</div>
+                    <div class="price">₱199</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('KHAKI SHORT', '₱99')">
+            <div class="grid-item-inner">
+                <img src="2.jpg" alt="">
+                <div class="info">
+                    <div class="name">KHAKI SHORT</div>
+                    <div class="price">₱99</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('DARK BLUE SHORT', '₱199')">
+            <div class="grid-item-inner">
+                <img src="3.jpg" alt="">
+                <div class="info">
+                    <div class="name">DARK BLUE SHORT</div>
+                    <div class="price">₱199</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('LIGHT BLUE SHORT', '₱299')">
+            <div class="grid-item-inner">
+                <img src="4.jpg" alt="">
+                <div class="info">
+                    <div class="name">LIGHT BLUE SHORT</div>
+                    <div class="price">₱299</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('GREY SHORT', '₱159')">
+            <div class="grid-item-inner">
+                <img src="5.jpg" alt="">
+                <div class="info">
+                    <div class="name">GREY SHORT</div>
+                    <div class="price">₱159</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('BROWN SHORT', '₱99')">
+            <div class="grid-item-inner">
+                <img src="6.jpg" alt="">
+                <div class="info">
+                    <div class="name">BROWN SHORT</div>
+                    <div class="price">₱99</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('RED SHORT', '₱59')">
+            <div class="grid-item-inner">
+                <img src="7.jpg" alt="">
+                <div class="info">
+                    <div class="name">RED SHORT</div>
+                    <div class="price">₱59</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('MAONG', '₱59')">
+            <div class="grid-item-inner">
+                <img src="8.jpg" alt="">
+                <div class="info">
+                    <div class="name">MAONG</div>
+                    <div class="price">₱59</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('MOSSY SHORT', '₱199')">
+            <div class="grid-item-inner">
+                <img src="9.jpg" alt="">
+                <div class="info">
+                    <div class="name">MOSSY SHORT</div>
+                    <div class="price">₱199</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('ARMY SHORT', '₱129')">
+            <div class="grid-item-inner">
+                <img src="10.jpg" alt="">
+                <div class="info">
+                    <div class="name">ARMY SHORT</div>
+                    <div class="price">₱129</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('LIGHT BROWN SHORT', '₱109')">
+            <div class="grid-item-inner">
+                <img src="11.jpg" alt="">
+                <div class="info">
+                    <div class="name">LIGHT BROWN SHORT</div>
+                    <div class="price">₱109</div>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item" onclick="openForm('MAONG FOR KIDS', '₱99')">
+            <div class="grid-item-inner">
+                <img src="12.jpg" alt="">
+                <div class="info">
+                    <div class="name">MAONG FOR KIDS</div>
+                    <div class="price">₱99</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="overlay" id="overlay">
+        <div class="overlay-content">
+            <h2 id="item-name"></h2>
+            <p id="item-price"></p>
+            <form id="quantity-form">
+                <label for="quantity">Quantity:</label>
+                <div class="quantity-input">
+                    <button type="button" style="padding:2px; width:25px;" onclick="decreaseQuantity()">-</button>
+                    <input type="number" id="quantity" name="quantity" min="1" value="1" oninput="updatePrice()">
+                    <button type="button" style="padding:2px; width:25px;" onclick="increaseQuantity()">+</button>
+                </div>
+                <br><br>
+                <button type="submit" style="border-radius: 10%; padding:7px;">Add to Cart</button>
+            </form>
+            <button class="close-btn" style="border-radius: 10%; width:80px;" onclick="closeForm()">Close</button>
+        </div>
+    </div>
+   
+    <script>
+        let itemPrice = 0;
+
+        function openForm(name, price) {
+    itemPrice = parseFloat(price.replace('₱', '')); 
+    document.getElementById("overlay").style.display = "flex";
+    document.getElementById("item-name").innerText = name;
+    document.getElementById("item-price").innerText = "Price: ₱" + itemPrice.toFixed(2); 
+   
+}
+
+        function closeForm() {
+            document.getElementById("quantity").value = 1;
+            document.getElementById("overlay").style.display = "none";
+        }
+
+        function updatePrice() {
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let totalPrice = quantity * itemPrice;
+            document.getElementById("item-price").innerText = "Price: ₱" + totalPrice;
+            
+        }
+
+        function increaseQuantity() {
+            let quantityInput = document.getElementById("quantity");
+            quantityInput.value = parseInt(quantityInput.value) + 1;
+            updatePrice();
+        }
+
+        function decreaseQuantity() {
+            let quantityInput = document.getElementById("quantity");
+            if (parseInt(quantityInput.value) > 1) {
+                quantityInput.value = parseInt(quantityInput.value) - 1;
+                updatePrice();
+            }
+        }
+
+        document.getElementById("quantity-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            let quantity = parseInt(document.getElementById("quantity").value);
+            let itemName = document.getElementById("item-name").innerText;
+            let totalPrice = quantity * itemPrice;
+
+            if (quantity > 0 && !isNaN(quantity)) {
+    
+    
+    window.location.href = 'checkout.html?name=' + encodeURI(itemName) + '&quantity=' + quantity + '&price=' + totalPrice.toFixed(2);
+} else {
+    alert("Please enter a valid quantity.");
+}
+document.getElementById("quantity").value = 1;
+        });
+    </script>
+</body>
+</html>
+
